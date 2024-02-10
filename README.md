@@ -1,3 +1,3 @@
-![hbnb]("./assets/logo.png")
+![hbnb](./assets/logo.png)
 
 # AirBnB clone project
