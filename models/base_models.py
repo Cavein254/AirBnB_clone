@@ -21,7 +21,7 @@ class BaseModel:
         obj = self.__dict__.copy()
         obj['__class__'] = self.__class__.__name__
         obj['created_at'] = self.created_at.isoformat()
-        obj['update_at'] = self.updated_at.isoformat()
+        obj['updated_at'] = self.updated_at.isoformat()
         return obj
 
 
