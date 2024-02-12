@@ -5,42 +5,40 @@ import os
 
 from models.base_model import BaseModel
 class FileStorage:
-    def __init__(self, file_path="storage.json"):
-        self.file_path = file_path
-        self.objects = {}
+    __objects = {}
+    __file_path="file.json"
 
     def new(self, obj):
         obj_name = obj.__class__.__name__
         key = "{}.{}".format(obj_name, obj.id)
-        self.objects[key] = obj
+        FileStorage.__objects[key] = obj
     
     def all(self):
-        return self.objects
+
+        return FileStorage.__objects
 
     def save(self):
         data = {}
-        for key, value in self.objects.items():
-            data[key] = self.objects[key].to_dict()
+        all_objs = FileStorage.__objects
+        for key in all_objs.keys():
+            data[key] = all_objs[key].to_dict()
 
-        with open(self.file_path, 'w') as file:
+        with open(FileStorage.__file_path, 'w') as file:
             json.dump(data, file) 
 
     def reload(self):
-        if os.path.exists(self.file_path):
-            with open(self.file_path, 'r') as file:
+        if os.path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path, 'r') as file:
                 try:
                     data = json.load(file)
-                    for key, value in data.items():
-                        obj_class, obj = key.split(".")
-                        obj_class_instance = eval(obj_class)
-                        instance = obj_class_instance(**value)
-                        self.objects[key] = instance
+                    for key in data.values():
+                        class_name = key["__class__"]
+                        del key["__class__"]
+                        self.new(eval(class_name)(**key))
+                        print(FileStorage.__objects)
                 except Exception:
                     pass
                 
-    def add_object(self, obj):
-        key = f"{obj.__class__.__name__}.{obj.id}"
-        self.objects[key] = obj
 
 # if __name__ == "__main__":
 #     storage = FileStorage()
