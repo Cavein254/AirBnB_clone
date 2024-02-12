@@ -3,6 +3,7 @@
 from datetime import datetime
 from uuid import uuid4
 
+
 class BaseModel:
     def __init__(self, id=None, created_at=None, updated_at=None):
         self.id = str(uuid4())
@@ -11,9 +12,10 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.now()
-    
+
     def __str__(self) -> str:
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(self.__class__.__name__,
+                                     self.id, self.__dict__)
 
     def to_dict(self):
         obj = self.__dict__.copy()
@@ -21,6 +23,7 @@ class BaseModel:
         obj['created_at'] = self.created_at.isoformat()
         obj['update_at'] = self.updated_at.isoformat()
         return obj
+
 
 if __name__ == "__main__":
     my_model = BaseModel()
@@ -33,4 +36,5 @@ if __name__ == "__main__":
     print(my_model_json)
     print("JSON of my_model:")
     for key in my_model_json.keys():
-        print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+        print("\t{}: ({}) - {}".format(key, type(my_model_json[key]),
+                                       my_model_json[key]))
