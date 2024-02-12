@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 
-class BaseModel():
+class BaseModel:
     def __init__(self, id=None, created_at=None, updated_at=None):
         self.id = id
         self.created_at = datetime.now()
