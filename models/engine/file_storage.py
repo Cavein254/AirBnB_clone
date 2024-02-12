@@ -3,7 +3,7 @@ from datetime import datetime
 import json
 import os
 
-from models.base_models import BaseModel
+from models.base_model import BaseModel
 class FileStorage:
     def __init__(self, file_path="storage.json"):
         self.file_path = file_path
@@ -13,6 +13,9 @@ class FileStorage:
         obj_name = obj.__class__.__name__
         key = "{}.{}".format(obj_name, obj.id)
         self.objects[key] = obj
+    
+    def all(self):
+        return self.objects
 
     def save(self):
         data = {}

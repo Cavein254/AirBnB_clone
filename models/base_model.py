@@ -20,6 +20,7 @@ class BaseModel:
             self.updated_at = datetime.now()
         models.storage.new(self)
 
+
     def save(self):
         self.updated_at = datetime.now()
         models.storage.save()
