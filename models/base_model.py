@@ -6,6 +6,10 @@ import models
 
 class BaseModel:
     def __init__(self, *args, **kwargs):
+        self.id = str(uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        
         if kwargs:
             for key, value in kwargs.items:
                 if key == "__class__":
@@ -13,11 +17,7 @@ class BaseModel:
                 elif key == 'created_at' or key == 'updated_at':
                     setattr(self, key, datetime.strftime(value,"%Y-%m-%dT%H:%M:%S.%f"))
                 else:
-                    setattr(self, key, value)
-        else:
-            self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+                    setattr(self, key, value)            
         models.storage.new(self)
 
 

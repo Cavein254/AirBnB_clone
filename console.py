@@ -31,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class does not exist **")
         else:
             instance = eval(f"{cmds[0]}()")
-            instance.save()
+            storage.save()
             print(instance.id)
     
     def do_show(self, arg):
