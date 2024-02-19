@@ -6,6 +6,7 @@ from models.base_model import BaseModel
 from models import storage
 from models.user import User
 
+
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     valid_classes = ["BaseModel", "User"]
@@ -50,8 +51,6 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-
-
     def do_all(self, arg):
         cmds = shlex.split(arg)
         objs = storage.all()
@@ -69,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
                     val = str(value)
                     print(val)
 
-    def do_destroy(self,arg):
+    def do_destroy(self, arg):
         cmds = shlex.split(arg)
         if len(cmds) == 0:
             print("** class name missing **")
