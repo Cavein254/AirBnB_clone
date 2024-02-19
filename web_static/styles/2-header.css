@@ -3,7 +3,7 @@ header {
   height: 70px;
   width: 100%;
   border-bottom: 1px #cccccc solid;
-}
-header > img {
-  margin-left: 20px;
+  background-image: url("../images/logo.png");
+  background-position: 20px left;
+  background-repeat: no-repeat;
 }
